@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon src/server.ts",
     "lint": "eslint .--ext .ts",
-    "test": "tsc && nyc mocha dist/test/**/test.js",
+    "test": "tsc && nyc mocha dist/test/**/carValue.spec.js",
     "build": "tsc"
   },
   "keywords": [],
