@@ -111,19 +111,19 @@ export const convertToCarValue: RequestHandler = (req, res) => {
   const model = req.body.model;
   const year = req.body.year;
 
-  if (!model || !year) {
-    throw createHttpError(400, "request must include both model and year");
-  }
+  // if (!model || !year) {
+  //   throw createHttpError(400, "request must include both model and year");
+  // }
 
-  if (typeof year !== "number" || !Number.isInteger(year)) {
-    throw createHttpError(400, "Wrong data type: Year should be integer");
-  }
+  // if (typeof year !== "number" || !Number.isInteger(year)) {
+  //   throw createHttpError(400, "Wrong data type: Year should be integer");
+  // }
 
-  if (year <= 0) {
-    throw createHttpError(400, "Invalid input: Negative Year");
-  } else if (year < 1990 || year > 2023) {
-    throw createHttpError(400, "Invalid input: year should be between 1990 and 2023");
-  }
+  // if (year <= 0) {
+  //   throw createHttpError(400, "Invalid input: Negative Year");
+  // } else if (year < 1990 || year > 2023) {
+  //   throw createHttpError(400, "Invalid input: year should be between 1990 and 2023");
+  // }
 
   res.status(200).json(getCarValue(model, year));
 };
@@ -131,9 +131,9 @@ export const convertToCarValue: RequestHandler = (req, res) => {
 export const convertToRiskRating: RequestHandler = (req, res) => {
   // const claimArr: string[] = req.body.claim_history.split(" ");
   const claim = req.body.claim_history;
-  if (claim.length === 0) {
-    throw createHttpError(400, "invalid input: empty string");
-  }
+  // if (claim.length === 0) {
+  //   throw createHttpError(400, "invalid input: empty string");
+  // }
 
   res.status(200).json(getRiskRating(claim));
 };
