@@ -10,7 +10,8 @@ app.use(morgan("dev"));
 
 app.use(express.json());
 
-app.use("/api/cars", carRoutes);
+// app.use("/api/cars", carRoutes);
+app.use("/", carRoutes);
 
 app.use((req, res, next) => {
   next(createHttpError(404, "Endpoint not found"));
