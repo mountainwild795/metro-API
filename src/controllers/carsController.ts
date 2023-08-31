@@ -6,8 +6,9 @@ import { getCarValue, getRiskRating, getQuote } from "../services/carServices";
 
 export const getCars: RequestHandler = async (req, res, next) => {
   try {
-    const cars = await carModel.find().exec();
-    res.status(200).json(cars);
+    // const cars = await carModel.find().exec();
+    // res.status(200).json({ model: "civic", year: 2020 });
+    res.send({ model: "civic", year: 2020 });
   } catch (error) {
     next(error);
   }
