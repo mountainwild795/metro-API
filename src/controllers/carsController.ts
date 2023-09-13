@@ -6,9 +6,9 @@ import { getCarValue, getRiskRating, getQuote } from "../services/carServices";
 
 export const getCars: RequestHandler = async (req, res, next) => {
   try {
-    // const cars = await carModel.find().exec();
-    // res.status(200).json({ model: "civic", year: 2020 });
-    res.send({ model: "civic", year: 2020 });
+    const cars = await carModel.find(req.query).exec();
+    res.status(200).json(cars);
+    // res.send({ model: "civic", year: 2020 });
   } catch (error) {
     next(error);
   }
@@ -32,18 +32,23 @@ export const getCar: RequestHandler = async (req, res, next) => {
 };
 
 interface CreateCarBody {
+  make?: string;
   model?: string;
   year?: string;
 }
 
 export const createCar: RequestHandler<unknown, unknown, CreateCarBody, unknown> = async (req, res, next) => {
+  const make = req.body.make;
   const model = req.body.model;
   const year = req.body.year;
   try {
     if (!model || !year) {
+      console.log(make, model, year);
+
       throw createHttpError(400, "Car must have both model and year");
     }
     const newCar = await carModel.create({
+      make,
       model,
       year,
     });
@@ -59,12 +64,14 @@ interface updateCarParams {
 
 interface updateCarBody {
   model?: string;
+  make?: string;
   year?: number;
 }
 
 export const updateCar: RequestHandler<updateCarParams, unknown, updateCarBody, unknown> = async (req, res, next) => {
   const carId = req.params.carId;
   const newModel = req.body.model;
+  const newMake = req.body.make;
   const newYear = req.body.year;
   try {
     if (!mongoose.isValidObjectId(carId)) {
@@ -80,6 +87,7 @@ export const updateCar: RequestHandler<updateCarParams, unknown, updateCarBody, 
 
     car.model = newModel;
     car.year = newYear;
+    car.make = newMake;
 
     const updatedCar = await car.save();
     res.status(200).json(updatedCar);

@@ -2,6 +2,7 @@ import { InferSchemaType, Schema, model } from "mongoose";
 
 const carScheme = new Schema(
   {
+    make: { type: String },
     model: { type: String },
     year: { type: Number },
   },

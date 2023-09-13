@@ -1,5 +1,7 @@
 import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
+import cors from "cors";
+
 import carRoutes from "./routes/cars";
 import morgan from "morgan";
 import createHttpError, { isHttpError } from "http-errors";
@@ -9,6 +11,8 @@ const app = express();
 app.use(morgan("dev"));
 
 app.use(express.json());
+
+app.use(cors());
 
 // app.use("/api/cars", carRoutes);
 app.use("/", carRoutes);
