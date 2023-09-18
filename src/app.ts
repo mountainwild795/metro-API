@@ -2,7 +2,7 @@ import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 
-import carRoutes from "./routes/cars";
+import housesRoutes from "./routes/houses";
 import morgan from "morgan";
 import createHttpError, { isHttpError } from "http-errors";
 
@@ -14,8 +14,8 @@ app.use(express.json());
 
 app.use(cors());
 
-// app.use("/api/cars", carRoutes);
-app.use("/", carRoutes);
+app.use("/api/houses", housesRoutes);
+// app.use("/", housesRoutes);
 
 app.use((req, res, next) => {
   next(createHttpError(404, "Endpoint not found"));
